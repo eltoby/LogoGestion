@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="appLogo">
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript" src="scripts/angular.js"></script>
+    <script type="text/javascript" src="scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="scripts/appLogo.js"></script>
+    <script type="text/javascript" src="scripts/numeral/numeral.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="Content/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="Content/styles.css" />
+</head>
+<body>
+    <h1>LogoGestión</h1>
+    <h2>Ingreso de consumos y pagos</h2>
+    <div ng-controller="personasController as controller">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Personas {{controller.version}}</th>
+                    <th>Bar</th>
+                    <th>Kiosco</th>
+                    <th>Pago</th>
+                    <th>Saldo Ant.</th>
+                    <th>Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="persona in controller.listaPersonas">
+                    <td>{{persona.nombre}}</td>
+                    <td class="gastoBar"><input type="number" ng-model="persona.gastosBar" /></td>
+                    <td class="gastoKiosco"><input type="number" ng-model="persona.gastosKiosco" /></td>
+                    <td class="pago"><input type="number" ng-model="persona.pago" /></td>
+                    <td>{{persona.saldoAnt | currency}}</td>
+                    <td>{{persona.getSaldo() | currency}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>{{controller.getTotalGastosBar() | currency}}</th>
+                    <th>{{controller.getTotalGastosKiosco() | currency}}</th>
+                    <th>{{controller.getTotalPagos() | currency}}</th>
+                    <th>{{controller.getTotalSaldosAnt() | currency}}</th>
+                    <th>{{controller.getTotalSaldos() | currency}}</th>
+                </tr>
+            </tfoot>
+        </table>
+
+
+        <a class="btn btn-default" ng-click="controller.addPersona()">+</a>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("input").change(function () {
+                $(this).addClass("modified");
+            });
+        });
+    </script>
+</body>
+</html>
