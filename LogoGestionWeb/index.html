@@ -20,7 +20,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Personas {{controller.version}}</th>
+                    <th>Personas</th>
                     <th>Bar</th>
                     <th>Kiosco</th>
                     <th>Pago</th>
@@ -30,11 +30,11 @@
             </thead>
             <tbody>
                 <tr ng-repeat="persona in controller.listaPersonas">
-                    <td>{{persona.nombre}}</td>
-                    <td class="gastoBar"><input type="number" ng-model="persona.gastosBar" /></td>
-                    <td class="gastoKiosco"><input type="number" ng-model="persona.gastosKiosco" /></td>
-                    <td class="pago"><input type="number" ng-model="persona.pago" /></td>
-                    <td>{{persona.saldoAnt | currency}}</td>
+                    <td>{{persona.Nombre}}</td>
+                    <td class="gastoBar"><input type="number" ng-model="persona.GastosBar" /></td>
+                    <td class="gastoKiosco"><input type="number" ng-model="persona.GastosKiosco" /></td>
+                    <td class="pago"><input type="number" ng-model="persona.Pago" /></td>
+                    <td>{{persona.SaldoAnt | currency}}</td>
                     <td>{{persona.getSaldo() | currency}}</td>
                 </tr>
             </tbody>
@@ -53,6 +53,7 @@
 
         <a class="btn btn-default" ng-click="controller.addPersona()">+</a>
     </div>
+
     <script>
         $(document).ready(function () {
             $("input").change(function () {

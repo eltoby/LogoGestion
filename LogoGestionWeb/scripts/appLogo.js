@@ -3,71 +3,62 @@
 
     var app = angular.module('appLogo', ['ngRoute']);
 
-    app.controller('personasController', function () {
-        this.listaPersonas = lista;
-        this.version = "Alpha";
-
-        this.getTotalGastosBar = function () {
-            var total = 0;
-            for(var i = 0; i < this.listaPersonas.length; i++)
-            {
-                var persona = this.listaPersonas[i];
-                total += persona.gastosBar;
+    app.factory('saldos', function ($http) {
+        return {
+            getSaldos: function () {
+                var url = "http://localhost:15487/api/Saldos";
+                var result = $http.get(url);
+                return result;
+        //        return [
+        //{ Id: 1, Nombre: "Persona 1", GastosBar: 10.00, GastosKiosco: 3.50, Pago: 10.00, SaldoAnt: 40.50, getSaldo: getSaldoPersona },
+        //{ Id: 2, Nombre: "Persona 2", GastosBar: 15.00, GastosKiosco: 4.25, Pago: 20.00, SaldoAnt: 30.25, getSaldo: getSaldoPersona },
+        //{ Id: 3, Nombre: "Persona 3", GastosBar: 25.00, GastosKiosco: 8.00, Pago: 15.00, SaldoAnt: 104.5, getSaldo: getSaldoPersona }
+        //        ];
             }
-            return total;
         };
+    });
 
-        this.getTotalGastosKiosco = function () {
-            var total = 0;
-            for(var i = 0; i < this.listaPersonas.length; i++)
-            {
-                var persona = this.listaPersonas[i];
-                total += persona.gastosKiosco;
-            }
-            return total;
-        }
+    app.controller('personasController', function ($scope, saldos) {
+        $scope.controller = this;
+                saldos.getSaldos().success(function (data) {
+                    $scope.controller.listaPersonas = data;
+                    $scope.controller.getTotalGastosBar = function () { return getTotal($scope.controller.listaPersonas, 'GastosBar') };
+                    $scope.controller.getTotalGastosKiosco = function () { return getTotal($scope.controller.listaPersonas, 'GastosKiosco') };
+                    $scope.controller.getTotalPagos = function () { return getTotal($scope.controller.listaPersonas, 'Pago') };
+                    $scope.controller.getTotalSaldosAnt = function () { return getTotal($scope.controller.listaPersonas, 'SaldoAnt') };
 
-        this.getTotalPagos = function () {
-            var total = 0;
-            for (var i = 0; i < this.listaPersonas.length; i++) {
-                var persona = this.listaPersonas[i];
-                total += persona.pago;
-            }
-            return total;
-        }
+                    for(var i = 0; i < data.length; i++)
+                        $scope.controller.listaPersonas[i].getSaldo = getSaldoPersona;
 
-        this.getTotalSaldosAnt = function () {
-            var total = 0;
-            for (var i = 0; i < this.listaPersonas.length; i++) {
-                var persona = this.listaPersonas[i];
-                total += persona.saldoAnt;
-            }
-            return total;
-        }
+                    // TODO: Rever
+                    this.getTotalSaldos = function () { getTotal($scope.controller.listaPersonas, 'getSaldo') };
+        });
 
-        this.getTotalSaldos = function () {
-            var total = 0;
-            for (var i = 0; i < this.listaPersonas.length; i++) {
-                var persona = this.listaPersonas[i];
-                total += persona.getSaldo();
-            }
-            return total;
-        }
+        //
+        //    var total = 0;
+        //    for (var i = 0; i < $scope.listaPersonas.length; i++) {
+        //        var persona = $scope.listaPersonas[i];
+        //        total += persona.getSaldo();
+        //    }
+        //    return total;
+        //}
 
         this.addPersona = function()
         {
-//            this.version = "Beta";
-            this.listaPersonas.push({ id: 1, nombre: "Nombre", gastosBar: 0, gastosKiosco: 0, pago: 0, saldoAnt: 0, getSaldo: getSaldoPersona });
+            this.listaPersonas.push({ id: 1, Nombre: "Nombre", GastosBar: 0, GastosKiosco: 0, Pago: 0, SaldoAnt: 0, getSaldo: getSaldoPersona });
         }
     });
-
-    var lista = [
-        { id:1, nombre: "Persona 1", gastosBar: 10.00, gastosKiosco: 3.50, pago: 10.00, saldoAnt: 40.50, getSaldo: getSaldoPersona },
-        { id: 2, nombre: "Persona 2", gastosBar: 15.00, gastosKiosco: 4.25, pago: 20.00, saldoAnt: 30.25, getSaldo: getSaldoPersona },
-        { id: 3, nombre: "Persona 3", gastosBar: 25.00, gastosKiosco: 8.00, pago: 15.00, saldoAnt: 104.5, getSaldo: getSaldoPersona }
-    ];    
 })();
 
+function getTotal(lista, propName) {
+    var total = 0;
+    for (var i = 0; i < lista.length; i++) {
+        var persona = lista[i];
+        total += persona[propName];
+    }
+    return total;
+};
+
 function getSaldoPersona() {
-    return this.saldoAnt + this.gastosBar + this.gastosKiosco - this.pago;
+    return this.SaldoAnt + this.GastosBar + this.GastosKiosco - this.Pago;
 }

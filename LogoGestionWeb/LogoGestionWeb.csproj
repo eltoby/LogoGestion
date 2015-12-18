@@ -142,6 +142,7 @@
     <Content Include="scripts\appLogo.js" />
     <Content Include="scripts\numeral\numeral.js" />
     <Content Include="scripts\numeral\numeral.min.js" />
+    <Content Include="scripts\servicesLogo.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
