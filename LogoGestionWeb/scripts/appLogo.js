@@ -6,7 +6,7 @@
     app.factory('saldos', function ($http) {
         return {
             getSaldos: function () {
-                var url = "http://localhost:15487/api/Saldos";
+                var url = "http://localhost/LogoGestionApi/api/Saldos";
                 var result = $http.get(url);
                 return result;
         //        return [
