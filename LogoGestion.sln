@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoGestionWeb", "LogoGesti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoGestionApi", "LogoGestionApi\LogoGestionApi.csproj", "{A054E884-2F69-4705-AAE2-F59390E28F40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoGestion.DataAccess", "LogoGestion.DataAccess\LogoGestion.DataAccess.csproj", "{583D2ADF-9709-42D9-BBE2-F4499A364FB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A054E884-2F69-4705-AAE2-F59390E28F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A054E884-2F69-4705-AAE2-F59390E28F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A054E884-2F69-4705-AAE2-F59390E28F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583D2ADF-9709-42D9-BBE2-F4499A364FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583D2ADF-9709-42D9-BBE2-F4499A364FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583D2ADF-9709-42D9-BBE2-F4499A364FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583D2ADF-9709-42D9-BBE2-F4499A364FB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
